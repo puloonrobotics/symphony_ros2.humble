@@ -2,7 +2,7 @@
 
 ## Overview
 
-ROS 2 (Humble) packages for controlling **Puloon Symphony** collaborative robots (cobots): drivers, descriptions, controllers, MoveIt, and Gazebo.
+ROS2(Humble) packages for controlling **PULOON Robotics's Symphony** collaborative robots (cobots): drivers, descriptions, controllers, MoveIt, and Gazebo.
 
 ## Installation
 

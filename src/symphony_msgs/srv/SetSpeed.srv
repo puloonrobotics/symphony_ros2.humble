@@ -1,0 +1,5 @@
+# Speed scale 0.0 .. 1.0 (RTPRI setSpeed).
+float64 speed
+---
+bool success
+string message

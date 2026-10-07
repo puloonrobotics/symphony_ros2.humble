@@ -1,0 +1,18 @@
+# Force-control axes [Mx,My,Mz,Mrx,Mry,Mrz] (= x,y,z,rx,ry,rz). Matches RTPRI setImpedance*.
+# Empty array = skip that field (ROS only); else size 6. Cached, resent on start_force_control.
+
+# Inertia > 0. [kg] / [kg m^2].
+float64[] impedance_mass
+
+# Stiffness >= 0. [N/m] / [Nm/rad].
+float64[] impedance_stiffness
+
+# Damping ratio >= 0 (1 = critical). Send with mass/stiffness if changing both.
+float64[] impedance_damping_ratio
+
+# Compliance >= 0; non-zero axes enter force selection.
+float64[] compliance
+
+---
+bool success
+string message

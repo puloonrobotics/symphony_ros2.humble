@@ -1,0 +1,10 @@
+<library path="symphony_driver">
+  <class
+    name="symphony_driver/SymphonyHardwareInterface"
+    type="symphony_driver::SymphonyHardwareInterface"
+    base_class_type="hardware_interface::SystemInterface">
+    <description>
+      ros2_control hardware interface for Symphony via RTPRI.
+    </description>
+  </class>
+</library>

@@ -1,0 +1,150 @@
+# Controller types and parameters for symphony_bringup.
+
+controller_manager:
+  ros__parameters:
+    update_rate: 500
+    hardware_components_initial_state:
+      shutdown_on_initial_state_failure: false
+
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+
+    force_torque_sensor_broadcaster:
+      type: force_torque_sensor_broadcaster/ForceTorqueSensorBroadcaster
+
+    tcp_pose_broadcaster:
+      type: pose_broadcaster/PoseBroadcaster
+
+    joint_trajectory_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+
+    motion_primitive_controller:
+      type: symphony_controllers/MotionPrimitiveController
+
+    motion_options_controller:
+      type: symphony_controllers/MotionOptionsController
+
+    forward_position_controller:
+      type: symphony_controllers/ForwardPositionController
+
+    forward_velocity_controller:
+      type: forward_command_controller/ForwardCommandController
+
+    cartesian_pose_controller:
+      type: symphony_controllers/CartesianPoseController
+
+    status_controller:
+      type: symphony_controllers/StatusController
+
+    io_controller:
+      type: symphony_controllers/IoController
+
+    force_controller:
+      type: symphony_controllers/ForceController
+
+    tool_modbus_controller:
+      type: symphony_controllers/ToolModbusController
+
+    native_joint_trajectory_controller:
+      type: symphony_controllers/NativeJointTrajectoryController
+
+joint_state_broadcaster:
+  ros__parameters: {}
+
+force_torque_sensor_broadcaster:
+  ros__parameters:
+    sensor_name: tcp_fts_sensor
+    frame_id: tool0
+
+tcp_pose_broadcaster:
+  ros__parameters:
+    frame_id: base
+    pose_name: tcp_pose
+    tf:
+      child_frame_id: tool0_controller
+
+joint_trajectory_controller:
+  ros__parameters:
+    joints:
+      - joint0
+      - joint1
+      - joint2
+      - joint3
+      - joint4
+      - joint5
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
+      - velocity
+    state_publish_rate: 50.0
+    action_monitor_rate: 20.0
+    allow_partial_joints_goal: false
+    constraints:
+      stopped_velocity_tolerance: 0.1
+      goal_time: 0.5
+      joint0: { trajectory: 0.2, goal: 0.02 }
+      joint1: { trajectory: 0.2, goal: 0.02 }
+      joint2: { trajectory: 0.2, goal: 0.02 }
+      joint3: { trajectory: 0.2, goal: 0.02 }
+      joint4: { trajectory: 0.2, goal: 0.02 }
+      joint5: { trajectory: 0.2, goal: 0.02 }
+
+motion_primitive_controller:
+  ros__parameters:
+    tf_prefix: ""
+
+forward_position_controller:
+  ros__parameters:
+    joints:
+      - joint0
+      - joint1
+      - joint2
+      - joint3
+      - joint4
+      - joint5
+    interface_name: position
+
+forward_velocity_controller:
+  ros__parameters:
+    joints:
+      - joint0
+      - joint1
+      - joint2
+      - joint3
+      - joint4
+      - joint5
+    interface_name: velocity
+
+cartesian_pose_controller:
+  ros__parameters:
+    frame_id: base
+
+status_controller:
+  ros__parameters: {}
+
+io_controller:
+  ros__parameters: {}
+
+force_controller:
+  ros__parameters: {}
+
+tool_modbus_controller:
+  ros__parameters: {}
+
+motion_options_controller:
+  ros__parameters: {}
+
+native_joint_trajectory_controller:
+  ros__parameters:
+    joints:
+      - joint0
+      - joint1
+      - joint2
+      - joint3
+      - joint4
+      - joint5
+    max_points: 500                 # must match symphony_msgs kNativeJtMaxPoints / URDF
+    path_tolerance: 0.01            # [rad], <=0: disable reduction
+    handshake_timeout: 2.0          # [s]
+    execution_timeout_margin: 10.0  # [s], 0: disable

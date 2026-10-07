@@ -1,0 +1,7 @@
+# Runtime RT stream params for startRtServoQ/SpeedQControl.
+# Defaults match URDF: period=0.002 s, filter=10.
+float64 period
+uint32 filter
+---
+bool success
+string message

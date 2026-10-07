@@ -1,0 +1,38 @@
+joint_limits:
+  joint0:
+    has_acceleration_limits: true
+    max_acceleration: 204.0
+  joint1:
+    has_acceleration_limits: true
+    max_acceleration: 204.0
+  joint2:
+    has_acceleration_limits: true
+    max_acceleration: 204.0
+  joint3:
+    has_acceleration_limits: true
+    max_acceleration: 36.0
+  joint4:
+    has_acceleration_limits: true
+    max_acceleration: 36.0
+  joint5:
+    has_acceleration_limits: true
+    max_acceleration: 36.0
+    
+  robotiq_85_left_finger_tip_joint:
+    has_acceleration_limits: true
+    max_acceleration: 230.0
+  robotiq_85_left_inner_knuckle_joint:
+    has_acceleration_limits: true
+    max_acceleration: 230.0
+  robotiq_85_left_knuckle_joint:
+    has_acceleration_limits: true
+    max_acceleration: 230.0
+  robotiq_85_right_finger_tip_joint:
+    has_acceleration_limits: true
+    max_acceleration: 230.0
+  robotiq_85_right_inner_knuckle_joint:
+    has_acceleration_limits: true
+    max_acceleration: 230.0
+  robotiq_85_right_knuckle_joint:
+    has_acceleration_limits: true
+    max_acceleration: 230.0

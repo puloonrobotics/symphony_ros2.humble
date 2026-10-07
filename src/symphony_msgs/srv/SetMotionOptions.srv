@@ -1,0 +1,23 @@
+# Sticky moprim / moveCMP / servoQ options until next set or ~/reset_motion_options.
+# work/tool: -1 = RTPRI default. fixedspeed: m/s else setSpeed %.
+# cfg: >=0 appended as pose[6]. <0 = omit 7th (size 6; RTPRI pads cfg=0).
+# coord: -1 = auto (PTP/CMP→JNT, LIN→XYZ, ARC→XYZ only). Else RTPRI enum 1=JNT 2=XYZ 3=TOOL.
+# weaving/fixedorient: LIN/ARC only (default false).
+# ext: movePTP external axis (default 0).
+# tol: -1 = moprim blend_radius / moveCMP API default 10. >=0 overrides.
+# servo_relative: servoQ bRelative (default false = absolute).
+
+int32 work
+int32 tool
+bool rel
+bool fixedspeed
+int32 cfg
+int32 coord
+bool weaving
+bool fixedorient
+int32 ext
+int32 tol
+bool servo_relative
+---
+bool success
+string message

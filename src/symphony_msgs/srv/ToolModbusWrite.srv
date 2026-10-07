@@ -1,0 +1,9 @@
+uint8 TYPE_BIT = 0
+uint8 TYPE_REGISTER = 1
+
+uint8 type
+uint16 address
+uint16[] values
+---
+bool success
+string message

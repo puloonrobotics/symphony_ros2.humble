@@ -1,0 +1,21 @@
+# colcon
+build/
+install/
+log/
+
+# Python
+*.pyc
+__pycache__/
+*.egg-info/
+
+# IDE / editor
+.idea/
+.vscode/
+*.user
+CMakeLists.txt.user
+*~
+.#*
+
+# Local / generated
+.rtpri-install/
+*.pcd

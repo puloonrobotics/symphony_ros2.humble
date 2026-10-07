@@ -1,0 +1,11 @@
+# Tool-flange out. DIGITAL: pin 1-based + state. ANALOG_VOLTAGE: value 0-255.
+uint8 TYPE_DIGITAL = 0
+uint8 TYPE_ANALOG_VOLTAGE = 1
+
+uint8 type
+uint8 pin
+bool state
+float64 value
+---
+bool success
+string message

@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro">
+
+    <xacro:macro name="symphony_ros2_control" params="
+        name
+        symphony_type
+        prefix
+        initial_positions:=${dict(joint0=0.0,joint1=-1.57,joint2=0.0,joint3=-1.57,joint4=0.0,joint5=0.0)}
+        config_joint_limit_parameters
+        sim_gazebo:=false">
+        
+        <xacro:property name="deg_to_rad" value="${3.14159265359/180.0}"/>
+        <xacro:property name="sec_limits" value="${config_joint_limit_parameters['joint_limits']}"/>
+
+        <ros2_control name="${name}" type="system">
+        
+            <hardware>
+                <xacro:if value="${sim_gazebo}">
+                    <plugin>gazebo_ros2_control/GazeboSystem</plugin>
+                </xacro:if>
+                <xacro:unless value="${sim_gazebo}">
+                    <plugin>fake_components/GenericSystem</plugin>
+                    <param name="state_following_offset">0.0</param>
+                </xacro:unless>
+            </hardware>
+
+            <xacro:macro name="define_control_joint" params="joint_index">
+                <joint name="${prefix}${joint_index}">
+                    <command_interface name="position">
+                        <param name="min">${sec_limits[joint_index]['min_position']*deg_to_rad}</param>
+                        <param name="max">${sec_limits[joint_index]['max_position']*deg_to_rad}</param>
+                    </command_interface>
+                    <command_interface name="velocity">
+                        <param name="min">${-1 * sec_limits[joint_index]['max_velocity']*deg_to_rad}</param>
+                        <param name="max">${sec_limits[joint_index]['max_velocity']*deg_to_rad}</param>
+                    </command_interface>
+                    <!-- <state_interface name="position"/> -->
+                    <state_interface name="position">
+                        <param name="initial_value">${initial_positions[joint_index]}</param>
+                    </state_interface>
+                    <!-- <state_interface name="velocity"/> -->
+                    <state_interface name="velocity">
+                        <param name="initial_value">0.0</param>
+                    </state_interface>
+                    <state_interface name="effort"/>
+                </joint>
+            </xacro:macro>
+
+            <xacro:define_control_joint joint_index="joint0"/>
+            <xacro:define_control_joint joint_index="joint1"/>
+            <xacro:define_control_joint joint_index="joint2"/>
+            <xacro:define_control_joint joint_index="joint3"/>
+            <xacro:define_control_joint joint_index="joint4"/>
+            <xacro:define_control_joint joint_index="joint5"/>
+        </ros2_control>
+
+    </xacro:macro>
+
+</robot>

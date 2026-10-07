@@ -1,0 +1,7 @@
+# mass [kg], CoG [m] (HW -> mm), inertia Ixx/Iyy/Izz.
+float64 mass
+float64[3] center_of_mass
+float64[3] inertia
+---
+bool success
+string message

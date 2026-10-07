@@ -1,0 +1,5 @@
+# Gravity direction (unit-ish). armx: m_vg = 9.80665 * g. Floor mount: [0,0,-1].
+float64[3] gravity
+---
+bool success
+string message

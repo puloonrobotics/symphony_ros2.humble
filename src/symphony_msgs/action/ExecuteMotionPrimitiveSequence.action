@@ -1,0 +1,13 @@
+# Motions executed in order. They may mix LINEAR_JOINT, LINEAR_CARTESIAN,
+# and CIRCULAR_CARTESIAN. Same layout as control_msgs/ExecuteMotionPrimitiveSequence.
+MotionPrimitiveSequence trajectory
+---
+int32 SUCCESSFUL = 0
+int32 INVALID_GOAL = -1
+int32 OLD_HEADER_TIMESTAMP = -3
+
+int32 error_code
+string error_string
+---
+# Index of the motion currently being executed.
+uint8 current_primitive_index

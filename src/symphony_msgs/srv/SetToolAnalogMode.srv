@@ -1,0 +1,5 @@
+# true: analog in; false: Tool IO Modbus. Call before open_modbus.
+bool enable_analog
+---
+bool success
+string message

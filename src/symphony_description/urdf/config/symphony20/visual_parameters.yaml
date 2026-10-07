@@ -1,0 +1,85 @@
+mesh_files:
+  link0:
+    visual:
+      mesh:
+        package: symphony_description
+        path: meshes/symphony20/visual/symphony20_0_w.dae
+        #path: meshes/symphony20/visual/symphony20_0_b.dae
+        #path: meshes/symphony20/visual/symphony20_0_s.stl
+      material: ""
+    collision:
+      mesh:
+        package: symphony_description
+        path: meshes/symphony20/collision/symphony20_0_s.stl
+  link1:
+    visual:
+      mesh:
+        package: symphony_description
+        path: meshes/symphony20/visual/symphony20_1_w.dae
+        #path: meshes/symphony20/visual/symphony20_1_b.dae
+        #path: meshes/symphony20/visual/symphony20_1_s.stl
+      material: ""
+    collision:
+      mesh:
+        package: symphony_description
+        path: meshes/symphony20/collision/symphony20_1_s.stl
+  link2:
+    visual:
+      mesh:
+        package: symphony_description
+        path: meshes/symphony20/visual/symphony20_2_w.dae
+        #path: meshes/symphony20/visual/symphony20_2_b.dae
+        #path: meshes/symphony20/visual/symphony20_2_s.stl
+      material: ""
+    collision:
+      mesh:
+        package: symphony_description
+        path: meshes/symphony20/collision/symphony20_2_s.stl
+  link3:
+    visual:
+      mesh:
+        package: symphony_description
+        path: meshes/symphony20/visual/symphony20_3_w.dae
+        #path: meshes/symphony20/visual/symphony20_3_b.dae
+        #path: meshes/symphony20/visual/symphony20_3_s.stl
+      material: ""
+    collision:
+      mesh:
+        package: symphony_description
+        path: meshes/symphony20/collision/symphony20_3_s.stl
+  link4:
+    visual:
+      mesh:
+        package: symphony_description
+        path: meshes/symphony20/visual/symphony20_4_w.dae
+        #path: meshes/symphony20/visual/symphony20_4_b.dae
+        #path: meshes/symphony20/visual/symphony20_4_s.stl
+      material: ""
+    collision:
+      mesh:
+        package: symphony_description
+        path: meshes/symphony20/collision/symphony20_4_s.stl
+  link5:
+    visual:
+      mesh:
+        package: symphony_description
+        path: meshes/symphony20/visual/symphony20_5_w.dae
+        #path: meshes/symphony20/visual/symphony20_5_b.dae
+        #path: meshes/symphony20/visual/symphony20_5_s.stl
+      material: ""
+    collision:
+      mesh:
+        package: symphony_description
+        path: meshes/symphony20/collision/symphony20_5_s.stl
+  link6:
+    visual:
+      mesh:
+        package: symphony_description
+        path: meshes/symphony20/visual/symphony20_6_w.dae
+        #path: meshes/symphony20/visual/symphony20_6_b.dae
+        #path: meshes/symphony20/visual/symphony20_6_s.stl
+      material: ""
+    collision:
+      mesh:
+        package: symphony_description
+        path: meshes/symphony20/collision/symphony20_6_s.stl

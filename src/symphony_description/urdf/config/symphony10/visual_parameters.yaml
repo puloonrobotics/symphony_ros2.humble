@@ -1,0 +1,85 @@
+mesh_files:
+  link0:
+    visual:
+      mesh:
+        package: symphony_description
+        path: meshes/symphony10/visual/symphony10_0_w.dae
+        #path: meshes/symphony10/visual/symphony10_0_b.dae
+        #path: meshes/symphony10/visual/symphony10_0_s.stl
+      material: ""
+    collision:
+      mesh:
+        package: symphony_description
+        path: meshes/symphony10/collision/symphony10_0_s.stl
+  link1:
+    visual:
+      mesh:
+        package: symphony_description
+        path: meshes/symphony10/visual/symphony10_1_w.dae
+        #path: meshes/symphony10/visual/symphony10_1_b.dae
+        #path: meshes/symphony10/visual/symphony10_1_s.stl
+      material: ""
+    collision:
+      mesh:
+        package: symphony_description
+        path: meshes/symphony10/collision/symphony10_1_s.stl
+  link2:
+    visual:
+      mesh:
+        package: symphony_description
+        path: meshes/symphony10/visual/symphony10_2_w.dae
+        #path: meshes/symphony10/visual/symphony10_2_b.dae
+        #path: meshes/symphony10/visual/symphony10_2_s.stl
+      material: ""
+    collision:
+      mesh:
+        package: symphony_description
+        path: meshes/symphony10/collision/symphony10_2_s.stl
+  link3:
+    visual:
+      mesh:
+        package: symphony_description
+        path: meshes/symphony10/visual/symphony10_3_w.dae
+        #path: meshes/symphony10/visual/symphony10_3_b.dae
+        #path: meshes/symphony10/visual/symphony10_3_s.stl
+      material: ""
+    collision:
+      mesh:
+        package: symphony_description
+        path: meshes/symphony10/collision/symphony10_3_s.stl
+  link4:
+    visual:
+      mesh:
+        package: symphony_description
+        path: meshes/symphony10/visual/symphony10_4_w.dae
+        #path: meshes/symphony10/visual/symphony10_4_b.dae
+        #path: meshes/symphony10/visual/symphony10_4_s.stl
+      material: ""
+    collision:
+      mesh:
+        package: symphony_description
+        path: meshes/symphony10/collision/symphony10_4_s.stl
+  link5:
+    visual:
+      mesh:
+        package: symphony_description
+        path: meshes/symphony10/visual/symphony10_5_w.dae
+        #path: meshes/symphony10/visual/symphony10_5_b.dae
+        #path: meshes/symphony10/visual/symphony10_5_s.stl
+      material: ""
+    collision:
+      mesh:
+        package: symphony_description
+        path: meshes/symphony10/collision/symphony10_5_s.stl
+  link6:
+    visual:
+      mesh:
+        package: symphony_description
+        path: meshes/symphony10/visual/symphony10_6_w.dae
+        #path: meshes/symphony10/visual/symphony10_6_b.dae
+        #path: meshes/symphony10/visual/symphony10_6_s.stl
+      material: ""
+    collision:
+      mesh:
+        package: symphony_description
+        path: meshes/symphony10/collision/symphony10_6_s.stl

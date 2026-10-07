@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro" name="$(arg name)">
+
+    <xacro:arg name="name" default="symphony"/>
+
+    <xacro:arg name="prefix" default="" />
+
+    <xacro:arg name="symphony_type" default="symphony5"/>
+
+    <xacro:arg name="gripper" default="none"/>
+    <xacro:property name="gr" value="$(arg gripper)"/>
+
+    <xacro:include filename="$(find symphony_moveit)/srdf/symphony_macro.srdf.xacro"/>
+
+    <xacro:symphony_srdf name="$(arg name)" prefix="$(arg prefix)" symphony_type="$(arg symphony_type)"/>
+
+    <xacro:if value="${gr == 'robotiq_2f'}">
+        <xacro:include filename="$(find symphony_moveit)/srdf/robotiq_2f_macro.srdf.xacro"/>
+        <xacro:robitiq_85_srdf name="$(arg name)" prefix="$(arg prefix)" symphony_type="$(arg symphony_type)" gripper="$(arg gripper)"/>
+    </xacro:if> 
+</robot>

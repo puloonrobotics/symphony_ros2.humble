@@ -1,0 +1,65 @@
+<?xml version="1.0" ?>
+<robot name="symphony" xmlns:xacro="http://wiki.ros.org/xacro">
+
+  <xacro:include filename="$(find symphony_description)/urdf/symphony_macro.xacro"/>
+
+  <xacro:arg name="prefix" 	    default=""/>
+  <xacro:arg name="name" 		    default="symphony"/>
+  <xacro:arg name="symphony_type"   default="symphony5"/>
+  <xacro:arg name="sim_gazebo"  default="false"/>
+  
+
+  <xacro:arg name="gripper" default="none"/>
+  <xacro:property name="gr" value="$(arg gripper)"/>
+
+  <!-- parameters -->
+  <xacro:arg name="joint_limit_params" default="$(find symphony_description)/urdf/config/$(arg symphony_type)/joint_limits.yaml"/>
+  <xacro:arg name="kinematics_params" default="$(find symphony_description)/urdf/config/$(arg symphony_type)/kinematics.yaml"/>
+  <xacro:arg name="physical_params" default="$(find symphony_description)/urdf/config/$(arg symphony_type)/physical_parameters.yaml"/>
+  <xacro:arg name="visual_params" default="$(find symphony_description)/urdf/config/$(arg symphony_type)/visual_parameters.yaml"/>
+  <xacro:arg name="initial_positions" default="$(find symphony_description)/urdf/config/$(arg symphony_type)/initial_positions.yaml"/>
+  <xacro:arg name="transmission_hw_interface" default="hardware_interface/PositionJointInterface"/>
+  <xacro:arg name="use_fake_hardware" default="true"/>
+  <xacro:arg name="simulation_controllers" default="" />
+
+  <link name="world" />
+
+	<xacro:symphony_robot
+    prefix="$(arg prefix)"
+    name="$(arg name)"
+    symphony_type="$(arg symphony_type)"
+    parent="world"
+    joint_limits_parameters_file="$(arg joint_limit_params)"
+    kinematics_parameters_file="$(arg kinematics_params)"
+    physical_parameters_file="$(arg physical_params)"
+    visual_parameters_file="$(arg visual_params)"
+    transmission_hw_interface="$(arg transmission_hw_interface)"
+    initial_positions_file="$(arg initial_positions)"
+    sim_gazebo="$(arg sim_gazebo)"
+    >
+    <origin xyz="0 0 0" rpy="0 0 0" /> <!-- position robot in the world -->
+  </xacro:symphony_robot>
+
+  <xacro:if value="${gr == 'robotiq_2f'}">
+      <!-- <xacro:include filename="$(find symphony_description)/urdf/robotiq/robotiq_2f_85_gripper.urdf.xacro" /> -->
+      <xacro:include filename="$(find symphony_description)/urdf/robotiq/robotiq_2f_85_macro.urdf.xacro" />
+      <!-- <xacro:arg name="use_fake_hardware" default="true" /> -->
+      <!-- <xacro:property name="use_fake_hardware" value="${ 'true' if sim_gazebo == 'false' else 'false' }"/> -->
+      <xacro:robotiq_gripper name="RobotiqGripperHardwareInterface"
+       prefix="" parent="link6" use_fake_hardware="$(arg use_fake_hardware)"
+       sim_gazebo="$(arg sim_gazebo)">
+          <origin xyz="0 0 0" rpy="0 0 0" />
+      </xacro:robotiq_gripper>
+  </xacro:if>
+
+
+  <xacro:if value="$(arg sim_gazebo)">
+    <gazebo reference="world"> </gazebo>
+		<gazebo>
+      <plugin name="gz_ros2_control::GazeboSimROS2ControlPlugin" filename="libgz_ros2_control-system">
+        <parameters>$(arg simulation_controllers)</parameters>
+      </plugin>
+		</gazebo>
+	</xacro:if>
+
+</robot>

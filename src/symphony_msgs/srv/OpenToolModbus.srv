@@ -1,0 +1,5 @@
+# Modbus slave address (Tool IO must be in Modbus mode).
+uint16 device
+---
+bool success
+string message

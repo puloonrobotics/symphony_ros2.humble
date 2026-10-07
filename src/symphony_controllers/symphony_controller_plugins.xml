@@ -1,0 +1,67 @@
+<library path="symphony_controllers">
+  <class
+    name="symphony_controllers/StatusController"
+    type="symphony_controllers::StatusController"
+    base_class_type="controller_interface::ControllerInterface">
+    <description>
+      Publishes robot status and provides status-related services.
+    </description>
+  </class>
+  <class  name="symphony_controllers/IoController"
+          type="symphony_controllers::IoController"
+          base_class_type="controller_interface::ControllerInterface">
+    <description>
+      Publishes and controls robot and tool I/O.
+    </description>
+  </class>
+  <class  name="symphony_controllers/ForceController"
+          type="symphony_controllers::ForceController"
+          base_class_type="controller_interface::ControllerInterface">
+    <description>
+      Provides force control and related configuration functions.
+    </description>
+  </class>
+  <class  name="symphony_controllers/NativeJointTrajectoryController"
+          type="symphony_controllers::NativeJointTrajectoryController"
+          base_class_type="controller_interface::ControllerInterface">
+    <description>
+      Executes native robot-interpolated joint trajectories.
+    </description>
+  </class>
+  <class  name="symphony_controllers/ToolModbusController"
+          type="symphony_controllers::ToolModbusController"
+          base_class_type="controller_interface::ControllerInterface">
+    <description>
+      Provides Modbus RTU communication with the tool flange.
+    </description>
+  </class>
+  <class  name="symphony_controllers/MotionOptionsController"
+          type="symphony_controllers::MotionOptionsController"
+          base_class_type="controller_interface::ControllerInterface">
+    <description>
+      Sticky motion options for moprim and moveCMP.
+    </description>
+  </class>
+  <class  name="symphony_controllers/ForwardPositionController"
+          type="symphony_controllers::ForwardPositionController"
+          base_class_type="controller_interface::ControllerInterface">
+    <description>
+      Streams joint positions to RT servoQ.
+    </description>
+  </class>
+  <class  name="symphony_controllers/MotionPrimitiveController"
+          type="symphony_controllers::MotionPrimitiveController"
+          base_class_type="controller_interface::ControllerInterface">
+    <description>
+      movePTP / moveLIN / moveARC via ~/motion_primitive
+      (symphony_msgs/ExecuteMotionPrimitiveSequence). Cancel stops the motion.
+    </description>
+  </class>
+  <class  name="symphony_controllers/CartesianPoseController"
+          type="symphony_controllers::CartesianPoseController"
+          base_class_type="controller_interface::ControllerInterface">
+    <description>
+      Streams a TCP pose to RT servoX.
+    </description>
+  </class>
+</library>

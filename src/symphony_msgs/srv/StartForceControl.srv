@@ -1,0 +1,5 @@
+# TCP wrench; enables force control (OK with PTP/CMP and servoQ/speedQ).
+float64[6] wrench
+---
+bool success
+string message

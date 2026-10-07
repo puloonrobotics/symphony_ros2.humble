@@ -1,0 +1,12 @@
+# Cabinet analog out; channel 1-based. Tool voltage: ~/set_tool_io.
+uint8 BANK_SAFETY = 0
+uint8 BANK_SAFETY_EX1 = 1
+uint8 BANK_SAFETY_EX2 = 2
+uint8 BANK_TOOL = 3
+
+uint8 bank
+uint8 channel
+float64 value
+---
+bool success
+string message

@@ -1,0 +1,5 @@
+# clearFault(axis=0, bWarning). warning=false clears faults (default).
+bool warning
+---
+bool success
+string message

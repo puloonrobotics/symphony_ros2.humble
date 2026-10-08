@@ -7,17 +7,41 @@
         prefix
         initial_positions
         config_joint_limit_parameters
-        sim_gazebo:=false">
+        sim_gazebo:=false
+        use_fake_hardware:=true
+        robot_ip:=192.168.0.234">
+
+        <xacro:property name="vel_limits" value="${config_joint_limit_parameters['joint_limits']}"/>
+        <xacro:property name="max_joint_velocities"
+            value="${vel_limits['joint0']['max_velocity']},${vel_limits['joint1']['max_velocity']},${vel_limits['joint2']['max_velocity']},${vel_limits['joint3']['max_velocity']},${vel_limits['joint4']['max_velocity']},${vel_limits['joint5']['max_velocity']}"/>
 
         <ros2_control name="${name}" type="system">
-        
+
             <hardware>
                 <xacro:if value="${sim_gazebo}">
                     <plugin>gz_ros2_control/GazeboSimSystem</plugin>
                 </xacro:if>
                 <xacro:unless value="${sim_gazebo}">
-                    <plugin>mock_components/GenericSystem</plugin>
-                    <param name="state_following_offset">0.0</param>
+                    <xacro:if value="${use_fake_hardware}">
+                        <plugin>mock_components/GenericSystem</plugin>
+                        <param name="state_following_offset">0.0</param>
+                    </xacro:if>
+                    <xacro:unless value="${use_fake_hardware}">
+                        <plugin>symphony_driver/SymphonyHardwareInterface</plugin>
+                        <param name="robot_ip">${robot_ip}</param>
+                        <param name="rt_period">0.002</param>
+                        <param name="rt_filter">10</param>
+                        <param name="rt_settle">0.3</param>
+                        <param name="rt_max_joint_jump">0.5</param>
+                        <param name="rt_max_tcp_jump">0.15</param>
+                        <param name="command_watchdog_timeout">0</param>
+                        <!-- setSpeed 0~1 (moprim path scale; RT overspeed limit). -->
+                        <param name="initial_speed">1.0</param>
+                        <param name="rt_client_id">0</param>
+                        <param name="max_joint_velocities">${max_joint_velocities}</param>
+                        <param name="native_joint_trajectory_max_points">500</param>
+                        <param name="native_joint_trajectory_blend">10.0</param>
+                    </xacro:unless>
                 </xacro:unless>
             </hardware>
 
@@ -27,21 +51,329 @@
                         <param name="min">-6.283185</param>
                         <param name="max">6.283185</param>
                     </command_interface>
-                    <command_interface name="velocity">
-                        <param name="min">-3.15</param>
-                        <param name="max">3.15</param>
-                    </command_interface>
-                    <!-- <state_interface name="position"/> -->
+                    <command_interface name="velocity"/>
                     <state_interface name="position">
                         <param name="initial_value">${initial_positions[joint_index]}</param>
                     </state_interface>
-                    <!-- <state_interface name="velocity"/> -->
                     <state_interface name="velocity">
                         <param name="initial_value">0.0</param>
                     </state_interface>
                     <state_interface name="effort"/>
                 </joint>
             </xacro:macro>
+
+            <gpio name="speed_rate">
+                <state_interface name="value"/>
+                <command_interface name="command"/>
+            </gpio>
+            <gpio name="robot_status">
+                <state_interface name="op_mode"/>
+                <state_interface name="safety_status"/>
+                <state_interface name="safety_zone"/>
+                <state_interface name="arm_state"/>
+                <state_interface name="tool_io_status"/>
+                <state_interface name="servo_enable"/>
+                <state_interface name="arm_error_0"/>
+                <state_interface name="arm_error_1"/>
+                <state_interface name="arm_error_2"/>
+                <state_interface name="arm_error_3"/>
+                <state_interface name="arm_error_4"/>
+                <state_interface name="arm_error_5"/>
+                <state_interface name="arm_error_6"/>
+                <state_interface name="arm_error_7"/>
+                <state_interface name="arm_error_8"/>
+                <state_interface name="arm_error_9"/>
+                <command_interface name="servo_enable_cmd"/>
+                <command_interface name="clear_fault_cmd"/>
+                <command_interface name="clear_fault_warning"/>
+                <command_interface name="collision_enable_cmd"/>
+                <command_interface name="rt_period_cmd"/>
+                <command_interface name="rt_filter_cmd"/>
+                <command_interface name="pause_rt_cmd"/>
+                <command_interface name="resume_rt_cmd"/>
+            </gpio>
+            <gpio name="io">
+                <state_interface name="safety_di"/>
+                <state_interface name="safety_do"/>
+                <state_interface name="safety_ai0"/>
+                <state_interface name="safety_ai1"/>
+                <state_interface name="safety_ao0"/>
+                <state_interface name="safety_ao1"/>
+                <state_interface name="tool_di"/>
+                <state_interface name="tool_do"/>
+                <state_interface name="tool_ai0"/>
+                <state_interface name="tool_ai1"/>
+                <state_interface name="ex1_di"/>
+                <state_interface name="ex1_do"/>
+                <state_interface name="ex1_ai0"/>
+                <state_interface name="ex1_ai1"/>
+                <state_interface name="ex1_ai2"/>
+                <state_interface name="ex1_ai3"/>
+                <state_interface name="ex1_ao0"/>
+                <state_interface name="ex1_ao1"/>
+                <state_interface name="ex1_ao2"/>
+                <state_interface name="ex1_ao3"/>
+                <state_interface name="ex2_di"/>
+                <state_interface name="ex2_do"/>
+                <state_interface name="ex2_ai0"/>
+                <state_interface name="ex2_ai1"/>
+                <state_interface name="ex2_ai2"/>
+                <state_interface name="ex2_ai3"/>
+                <state_interface name="ex2_ao0"/>
+                <state_interface name="ex2_ao1"/>
+                <state_interface name="ex2_ao2"/>
+                <state_interface name="ex2_ao3"/>
+                <command_interface name="digital_seq"/>
+                <command_interface name="digital_bank"/>
+                <command_interface name="digital_pin"/>
+                <command_interface name="digital_value"/>
+                <command_interface name="analog_seq"/>
+                <command_interface name="analog_bank"/>
+                <command_interface name="analog_channel"/>
+                <command_interface name="analog_value"/>
+            </gpio>
+            <gpio name="tool_modbus">
+                <state_interface name="done_seq"/>
+                <state_interface name="ok"/>
+                <state_interface name="command"/>
+                <state_interface name="address"/>
+                <state_interface name="number"/>
+                <state_interface name="result_0"/>
+                <state_interface name="result_1"/>
+                <state_interface name="result_2"/>
+                <state_interface name="result_3"/>
+                <state_interface name="result_4"/>
+                <state_interface name="result_5"/>
+                <state_interface name="result_6"/>
+                <state_interface name="result_7"/>
+                <command_interface name="seq"/>
+                <command_interface name="op"/>
+                <command_interface name="device"/>
+                <command_interface name="address"/>
+                <command_interface name="size"/>
+                <command_interface name="value_0"/>
+                <command_interface name="value_1"/>
+                <command_interface name="value_2"/>
+                <command_interface name="value_3"/>
+                <command_interface name="value_4"/>
+                <command_interface name="value_5"/>
+                <command_interface name="value_6"/>
+                <command_interface name="value_7"/>
+            </gpio>
+            <gpio name="force">
+                <state_interface name="enabled"/>
+                <command_interface name="payload_seq"/>
+                <command_interface name="mass"/>
+                <command_interface name="cog_x"/>
+                <command_interface name="cog_y"/>
+                <command_interface name="cog_z"/>
+                <command_interface name="ixx"/>
+                <command_interface name="iyy"/>
+                <command_interface name="izz"/>
+                <command_interface name="gravity_seq"/>
+                <command_interface name="gx"/>
+                <command_interface name="gy"/>
+                <command_interface name="gz"/>
+                <command_interface name="bias_seq"/>
+                <command_interface name="force_seq"/>
+                <command_interface name="enable"/>
+                <command_interface name="fx"/>
+                <command_interface name="fy"/>
+                <command_interface name="fz"/>
+                <command_interface name="tx"/>
+                <command_interface name="ty"/>
+                <command_interface name="tz"/>
+                <command_interface name="param_seq"/>
+                <command_interface name="set_imp_mass"/>
+                <command_interface name="imp_mass_0"/>
+                <command_interface name="imp_mass_1"/>
+                <command_interface name="imp_mass_2"/>
+                <command_interface name="imp_mass_3"/>
+                <command_interface name="imp_mass_4"/>
+                <command_interface name="imp_mass_5"/>
+                <command_interface name="set_imp_stiffness"/>
+                <command_interface name="imp_stiffness_0"/>
+                <command_interface name="imp_stiffness_1"/>
+                <command_interface name="imp_stiffness_2"/>
+                <command_interface name="imp_stiffness_3"/>
+                <command_interface name="imp_stiffness_4"/>
+                <command_interface name="imp_stiffness_5"/>
+                <command_interface name="set_imp_damping"/>
+                <command_interface name="imp_damping_0"/>
+                <command_interface name="imp_damping_1"/>
+                <command_interface name="imp_damping_2"/>
+                <command_interface name="imp_damping_3"/>
+                <command_interface name="imp_damping_4"/>
+                <command_interface name="imp_damping_5"/>
+                <command_interface name="set_compliance"/>
+                <command_interface name="compliance_0"/>
+                <command_interface name="compliance_1"/>
+                <command_interface name="compliance_2"/>
+                <command_interface name="compliance_3"/>
+                <command_interface name="compliance_4"/>
+                <command_interface name="compliance_5"/>
+            </gpio>
+
+            <gpio name="motion_primitive">
+                <command_interface name="motion_type"/>
+                <command_interface name="q1"/>
+                <command_interface name="q2"/>
+                <command_interface name="q3"/>
+                <command_interface name="q4"/>
+                <command_interface name="q5"/>
+                <command_interface name="q6"/>
+                <command_interface name="pos_x"/>
+                <command_interface name="pos_y"/>
+                <command_interface name="pos_z"/>
+                <command_interface name="pos_qx"/>
+                <command_interface name="pos_qy"/>
+                <command_interface name="pos_qz"/>
+                <command_interface name="pos_qw"/>
+                <command_interface name="pos_via_x"/>
+                <command_interface name="pos_via_y"/>
+                <command_interface name="pos_via_z"/>
+                <command_interface name="pos_via_qx"/>
+                <command_interface name="pos_via_qy"/>
+                <command_interface name="pos_via_qz"/>
+                <command_interface name="pos_via_qw"/>
+                <command_interface name="blend_radius"/>
+                <command_interface name="velocity"/>
+                <command_interface name="acceleration"/>
+                <command_interface name="move_time"/>
+                <command_interface name="pause"/>
+                <command_interface name="resume"/>
+                <state_interface name="execution_status"/>
+                <state_interface name="ready_for_new_primitive">
+                    <param name="initial_value">1.0</param>
+                </state_interface>
+            </gpio>
+
+            <gpio name="motion_options">
+                <command_interface name="work">
+                    <param name="initial_value">-1.0</param>
+                </command_interface>
+                <command_interface name="tool">
+                    <param name="initial_value">-1.0</param>
+                </command_interface>
+                <command_interface name="rel">
+                    <param name="initial_value">0.0</param>
+                </command_interface>
+                <command_interface name="fixedspeed">
+                    <param name="initial_value">0.0</param>
+                </command_interface>
+                <command_interface name="cfg">
+                    <param name="initial_value">-1.0</param>
+                </command_interface>
+                <command_interface name="coord">
+                    <param name="initial_value">-1.0</param>
+                </command_interface>
+                <command_interface name="weaving">
+                    <param name="initial_value">0.0</param>
+                </command_interface>
+                <command_interface name="fixedorient">
+                    <param name="initial_value">0.0</param>
+                </command_interface>
+                <command_interface name="ext">
+                    <param name="initial_value">0.0</param>
+                </command_interface>
+                <command_interface name="tol">
+                    <param name="initial_value">-1.0</param>
+                </command_interface>
+                <command_interface name="servo_relative">
+                    <param name="initial_value">0.0</param>
+                </command_interface>
+                <state_interface name="work">
+                    <param name="initial_value">-1.0</param>
+                </state_interface>
+                <state_interface name="tool">
+                    <param name="initial_value">-1.0</param>
+                </state_interface>
+                <state_interface name="rel">
+                    <param name="initial_value">0.0</param>
+                </state_interface>
+                <state_interface name="fixedspeed">
+                    <param name="initial_value">0.0</param>
+                </state_interface>
+                <state_interface name="cfg">
+                    <param name="initial_value">-1.0</param>
+                </state_interface>
+                <state_interface name="coord">
+                    <param name="initial_value">-1.0</param>
+                </state_interface>
+                <state_interface name="weaving">
+                    <param name="initial_value">0.0</param>
+                </state_interface>
+                <state_interface name="fixedorient">
+                    <param name="initial_value">0.0</param>
+                </state_interface>
+                <state_interface name="ext">
+                    <param name="initial_value">0.0</param>
+                </state_interface>
+                <state_interface name="tol">
+                    <param name="initial_value">-1.0</param>
+                </state_interface>
+                <state_interface name="servo_relative">
+                    <param name="initial_value">0.0</param>
+                </state_interface>
+            </gpio>
+
+            <gpio name="native_joint_trajectory">
+                <command_interface name="setpoint_positions_0"/>
+                <command_interface name="setpoint_positions_1"/>
+                <command_interface name="setpoint_positions_2"/>
+                <command_interface name="setpoint_positions_3"/>
+                <command_interface name="setpoint_positions_4"/>
+                <command_interface name="setpoint_positions_5"/>
+                <command_interface name="setpoint_velocities_0"/>
+                <command_interface name="setpoint_velocities_1"/>
+                <command_interface name="setpoint_velocities_2"/>
+                <command_interface name="setpoint_velocities_3"/>
+                <command_interface name="setpoint_velocities_4"/>
+                <command_interface name="setpoint_velocities_5"/>
+                <command_interface name="setpoint_accelerations_0"/>
+                <command_interface name="setpoint_accelerations_1"/>
+                <command_interface name="setpoint_accelerations_2"/>
+                <command_interface name="setpoint_accelerations_3"/>
+                <command_interface name="setpoint_accelerations_4"/>
+                <command_interface name="setpoint_accelerations_5"/>
+                <command_interface name="transfer_state"/>
+                <command_interface name="time_from_start"/>
+                <command_interface name="abort"/>
+                <command_interface name="size"/>
+            </gpio>
+
+            <gpio name="servo_q">
+                <command_interface name="seq"/>
+            </gpio>
+
+            <gpio name="tcp_pose">
+                <command_interface name="position.x"/>
+                <command_interface name="position.y"/>
+                <command_interface name="position.z"/>
+                <command_interface name="orientation.x"/>
+                <command_interface name="orientation.y"/>
+                <command_interface name="orientation.z"/>
+                <command_interface name="orientation.w"/>
+                <command_interface name="seq"/>
+                <state_interface name="position.x"/>
+                <state_interface name="position.y"/>
+                <state_interface name="position.z"/>
+                <state_interface name="orientation.x"/>
+                <state_interface name="orientation.y"/>
+                <state_interface name="orientation.z"/>
+                <state_interface name="orientation.w">
+                    <param name="initial_value">1.0</param>
+                </state_interface>
+            </gpio>
+
+            <sensor name="tcp_fts_sensor">
+                <state_interface name="force.x"/>
+                <state_interface name="force.y"/>
+                <state_interface name="force.z"/>
+                <state_interface name="torque.x"/>
+                <state_interface name="torque.y"/>
+                <state_interface name="torque.z"/>
+            </sensor>
 
             <xacro:define_control_joint joint_index="joint0"/>
             <xacro:define_control_joint joint_index="joint1"/>

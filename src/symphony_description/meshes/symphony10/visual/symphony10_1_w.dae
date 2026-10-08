@@ -75,7 +75,8 @@
             <emission>
               <color sid="emission">0 0 0 1</color>
             </emission>
-            <diffuse>
+            <ambient><color sid="diffuse">0.95 0.95 0.95 1</color></ambient>
+          <diffuse>
               <color sid="diffuse">0.95 0.95 0.95 1</color>
             </diffuse>
             <reflectivity>
@@ -95,7 +96,8 @@
             <emission>
               <color sid="emission">0 0 0 1</color>
             </emission>
-            <diffuse>
+            <ambient><color sid="diffuse">0 0 0 1</color></ambient>
+          <diffuse>
               <color sid="diffuse">0 0 0 1</color>
             </diffuse>
             <index_of_refraction>
@@ -112,7 +114,8 @@
             <emission>
               <color sid="emission">0 0 0 1</color>
             </emission>
-            <diffuse>
+            <ambient><color sid="diffuse">0.63 0.63 0.63 1</color></ambient>
+          <diffuse>
               <color sid="diffuse">0.63 0.63 0.63 1</color>
             </diffuse>
             <reflectivity>
@@ -132,7 +135,8 @@
             <emission>
               <color sid="emission">0 0 0 1</color>
             </emission>
-            <diffuse>
+            <ambient><color sid="diffuse">0.01 0.01 0.8 1</color></ambient>
+          <diffuse>
               <color sid="diffuse">0.01 0.01 0.8 1</color>
             </diffuse>
             <index_of_refraction>

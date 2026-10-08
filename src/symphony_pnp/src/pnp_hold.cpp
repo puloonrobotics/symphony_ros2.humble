@@ -149,7 +149,7 @@ class PnpHold
   std::vector<SavedPose> parked_;
 };
 
-}  // namespace pnp_hold
+}
 
 IGNITION_ADD_PLUGIN(
   pnp_hold::PnpHold,

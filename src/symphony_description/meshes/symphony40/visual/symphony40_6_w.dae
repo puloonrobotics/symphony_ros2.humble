@@ -18,7 +18,8 @@
             <emission>
               <color sid="emission">0 0 0 1</color>
             </emission>
-            <diffuse>
+            <ambient><color sid="diffuse">0.66 0.66 0.66 1</color></ambient>
+          <diffuse>
               <color sid="diffuse">0.66 0.66 0.66 1</color>
             </diffuse>
             <reflectivity>
@@ -38,7 +39,8 @@
             <emission>
               <color sid="emission">0 0 0 1</color>
             </emission>
-            <diffuse>
+            <ambient><color sid="diffuse">0.01 1 0.01 1</color></ambient>
+          <diffuse>
               <color sid="diffuse">0.01 1 0.01 1</color>
             </diffuse>
             <index_of_refraction>

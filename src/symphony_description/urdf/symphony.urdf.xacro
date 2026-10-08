@@ -7,7 +7,9 @@
   <xacro:arg name="name" 		    default="symphony"/>
   <xacro:arg name="symphony_type"   default="symphony5"/>
   <xacro:arg name="sim_gazebo"  default="false"/>
-  
+  <!-- Triangle/box6 attach plugin. Off by default so missing libpnp_hold.so
+       cannot break symphony5. pnp.launch.py passes enable_pnp_hold:=true. -->
+  <xacro:arg name="enable_pnp_hold" default="false"/>
 
   <xacro:arg name="gripper" default="none"/>
   <xacro:property name="gr" value="$(arg gripper)"/>
@@ -18,8 +20,8 @@
   <xacro:arg name="physical_params" default="$(find symphony_description)/urdf/config/$(arg symphony_type)/physical_parameters.yaml"/>
   <xacro:arg name="visual_params" default="$(find symphony_description)/urdf/config/$(arg symphony_type)/visual_parameters.yaml"/>
   <xacro:arg name="initial_positions" default="$(find symphony_description)/urdf/config/$(arg symphony_type)/initial_positions.yaml"/>
-  <xacro:arg name="transmission_hw_interface" default="hardware_interface/PositionJointInterface"/>
   <xacro:arg name="use_fake_hardware" default="true"/>
+  <xacro:arg name="robot_ip" default="192.168.0.234"/>
   <xacro:arg name="simulation_controllers" default="" />
 
   <link name="world" />
@@ -33,18 +35,16 @@
     kinematics_parameters_file="$(arg kinematics_params)"
     physical_parameters_file="$(arg physical_params)"
     visual_parameters_file="$(arg visual_params)"
-    transmission_hw_interface="$(arg transmission_hw_interface)"
     initial_positions_file="$(arg initial_positions)"
     sim_gazebo="$(arg sim_gazebo)"
+    use_fake_hardware="$(arg use_fake_hardware)"
+    robot_ip="$(arg robot_ip)"
     >
     <origin xyz="0 0 0" rpy="0 0 0" /> <!-- position robot in the world -->
   </xacro:symphony_robot>
 
   <xacro:if value="${gr == 'robotiq_2f'}">
-      <!-- <xacro:include filename="$(find symphony_description)/urdf/robotiq/robotiq_2f_85_gripper.urdf.xacro" /> -->
       <xacro:include filename="$(find symphony_description)/urdf/robotiq/robotiq_2f_85_macro.urdf.xacro" />
-      <!-- <xacro:arg name="use_fake_hardware" default="true" /> -->
-      <!-- <xacro:property name="use_fake_hardware" value="${ 'true' if sim_gazebo == 'false' else 'false' }"/> -->
       <xacro:robotiq_gripper name="RobotiqGripperHardwareInterface"
        prefix="" parent="link6" use_fake_hardware="$(arg use_fake_hardware)"
        sim_gazebo="$(arg sim_gazebo)">
@@ -59,6 +59,22 @@
       <plugin name="gz_ros2_control::GazeboSimROS2ControlPlugin" filename="libgz_ros2_control-system">
         <parameters>$(arg simulation_controllers)</parameters>
       </plugin>
+      <xacro:if value="$(arg enable_pnp_hold)">
+        <plugin filename="libpnp_hold.so" name="pnp_hold::PnpHold">
+          <parent_link>link6</parent_link>
+          <child_model>triangle</child_model>
+          <child_link>base_link</child_link>
+          <attach_topic>/pnp/triangle/attach</attach_topic>
+          <detach_topic>/pnp/triangle/detach</detach_topic>
+        </plugin>
+        <plugin filename="libpnp_hold.so" name="pnp_hold::PnpHold">
+          <parent_link>link6</parent_link>
+          <child_model>box6</child_model>
+          <child_link>base_link</child_link>
+          <attach_topic>/pnp/box6/attach</attach_topic>
+          <detach_topic>/pnp/box6/detach</detach_topic>
+        </plugin>
+      </xacro:if>
 		</gazebo>
 	</xacro:if>
 

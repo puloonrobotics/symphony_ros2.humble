@@ -14,9 +14,6 @@
     <geometry>
       <box size="0.05 0.05 0.08" />
     </geometry>
-    <material name="pnp_color">
-      <color rgba="0.8 0.05 0.05 1"/>
-    </material>
   </visual>
 
   <inertial>
@@ -30,8 +27,9 @@
   </link>
 
 <gazebo reference="base_link">
-    <mu1>2.0</mu1>
-    <mu2>2.0</mu2>
+  <material>Gazebo/Red</material>
+    <mu1>8.0</mu1>
+    <mu2>8.0</mu2>
 </gazebo>
 
 </robot>

@@ -1,14 +1,17 @@
-# Active visual: DAE (_w). Visual STL (_s.stl) kept on disk; path commented below.
-# Spare: visual_parameters_dae.yaml / visual_parameters_stl.yaml
+# Spare: STL visual (_s) + URDF material colors.
+# STL has no baked color; set material to a name from materials.xacro
+# (symphony_white, grey, metal, metal_grey, orange, black, ...).
+# Note: one solid color per link (unlike DAE which can have multi-color parts).
+# Switch: cp visual_parameters_stl.yaml visual_parameters.yaml
 mesh_files:
   link0:
     visual:
       mesh:
         package: symphony_description
-        path: meshes/symphony5/visual/symphony5_0_w.dae
+        #path: meshes/symphony5/visual/symphony5_0_w.dae
         #path: meshes/symphony5/visual/symphony5_0_b.dae
-        #path: meshes/symphony5/visual/symphony5_0_s.stl
-      material: ""
+        path: meshes/symphony5/visual/symphony5_0_s.stl
+      material: "symphony_white"
     collision:
       mesh:
         package: symphony_description
@@ -17,10 +20,10 @@ mesh_files:
     visual:
       mesh:
         package: symphony_description
-        path: meshes/symphony5/visual/symphony5_1_w.dae
+        #path: meshes/symphony5/visual/symphony5_1_w.dae
         #path: meshes/symphony5/visual/symphony5_1_b.dae
-        #path: meshes/symphony5/visual/symphony5_1_s.stl
-      material: ""
+        path: meshes/symphony5/visual/symphony5_1_s.stl
+      material: "symphony_white"
     collision:
       mesh:
         package: symphony_description
@@ -29,10 +32,10 @@ mesh_files:
     visual:
       mesh:
         package: symphony_description
-        path: meshes/symphony5/visual/symphony5_2_w.dae
+        #path: meshes/symphony5/visual/symphony5_2_w.dae
         #path: meshes/symphony5/visual/symphony5_2_b.dae
-        #path: meshes/symphony5/visual/symphony5_2_s.stl
-      material: ""
+        path: meshes/symphony5/visual/symphony5_2_s.stl
+      material: "symphony_white"
     collision:
       mesh:
         package: symphony_description
@@ -41,10 +44,10 @@ mesh_files:
     visual:
       mesh:
         package: symphony_description
-        path: meshes/symphony5/visual/symphony5_3_w.dae
+        #path: meshes/symphony5/visual/symphony5_3_w.dae
         #path: meshes/symphony5/visual/symphony5_3_b.dae
-        #path: meshes/symphony5/visual/symphony5_3_s.stl
-      material: ""
+        path: meshes/symphony5/visual/symphony5_3_s.stl
+      material: "grey"
     collision:
       mesh:
         package: symphony_description
@@ -53,10 +56,10 @@ mesh_files:
     visual:
       mesh:
         package: symphony_description
-        path: meshes/symphony5/visual/symphony5_4_w.dae
+        #path: meshes/symphony5/visual/symphony5_4_w.dae
         #path: meshes/symphony5/visual/symphony5_4_b.dae
-        #path: meshes/symphony5/visual/symphony5_4_s.stl
-      material: ""
+        path: meshes/symphony5/visual/symphony5_4_s.stl
+      material: "symphony_white"
     collision:
       mesh:
         package: symphony_description
@@ -65,10 +68,10 @@ mesh_files:
     visual:
       mesh:
         package: symphony_description
-        path: meshes/symphony5/visual/symphony5_5_w.dae
+        #path: meshes/symphony5/visual/symphony5_5_w.dae
         #path: meshes/symphony5/visual/symphony5_5_b.dae
-        #path: meshes/symphony5/visual/symphony5_5_s.stl
-      material: ""
+        path: meshes/symphony5/visual/symphony5_5_s.stl
+      material: "grey"
     collision:
       mesh:
         package: symphony_description
@@ -77,10 +80,10 @@ mesh_files:
     visual:
       mesh:
         package: symphony_description
-        path: meshes/symphony5/visual/symphony5_6_w.dae
+        #path: meshes/symphony5/visual/symphony5_6_w.dae
         #path: meshes/symphony5/visual/symphony5_6_b.dae
-        #path: meshes/symphony5/visual/symphony5_6_s.stl
-      material: ""
+        path: meshes/symphony5/visual/symphony5_6_s.stl
+      material: "symphony_white"
     collision:
       mesh:
         package: symphony_description

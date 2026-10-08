@@ -14,9 +14,6 @@
     <geometry>
         <mesh filename="file://$(find symphony_pnp)/models/triangle.dae"/>
     </geometry>
-    <material name="pnp_color">
-      <color rgba="0.55 0.15 0.75 1"/>
-    </material>
   </visual>
 
   <inertial>
@@ -30,6 +27,7 @@
   </link>
 
 <gazebo reference="base_link">
+  <material>Gazebo/Purple</material>
     <mu1>20.0</mu1>
     <mu2>20.0</mu2>
 </gazebo>

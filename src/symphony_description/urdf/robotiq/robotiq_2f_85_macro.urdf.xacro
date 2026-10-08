@@ -177,28 +177,53 @@
                 </geometry>
             </visual>
             <collision>
-                <geometry>
-                    <!-- <mesh filename="package://symphony_description/meshes/robotiq/collision/2f_85/left_finger_tip.stl" /> -->
-                    <mesh filename="file://$(find symphony_description)/meshes/robotiq/collision/2f_85/left_finger_tip.stl" scope="parent"/>
-                </geometry>
-                <surface>
-                    <friction>
-                    <ode>
-                        <mu1>100000.0</mu1>
-                        <mu2>100000.0</mu2>
-                    </ode>
-                    </friction>
-                    <contact>
-                    <ode>
-                        <kp>1e+5</kp>
-                        <kd>1</kd>
-                        <soft_cfm>0</soft_cfm>
-                        <soft_erp>0.2</soft_erp>
-                        <minDepth>0.002</minDepth>
-                        <maxVel>0</maxVel>
-                    </ode>
-                    </contact>
-                </surface>
+                <xacro:if value="${sim_gazebo}">
+                    <origin xyz="-0.021 0 0.028" rpy="0 0 0"/>
+                    <geometry>
+                        <box size="0.008 0.016 0.036"/>
+                    </geometry>
+                    <surface>
+                        <friction>
+                        <ode>
+                            <mu1>100000.0</mu1>
+                            <mu2>100000.0</mu2>
+                        </ode>
+                        </friction>
+                        <contact>
+                        <ode>
+                            <kp>1e+5</kp>
+                            <kd>1</kd>
+                            <soft_cfm>0</soft_cfm>
+                            <soft_erp>0.2</soft_erp>
+                            <minDepth>0.002</minDepth>
+                            <maxVel>0</maxVel>
+                        </ode>
+                        </contact>
+                    </surface>
+                </xacro:if>
+                <xacro:unless value="${sim_gazebo}">
+                    <geometry>
+                        <mesh filename="file://$(find symphony_description)/meshes/robotiq/collision/2f_85/left_finger_tip.stl" scope="parent"/>
+                    </geometry>
+                    <surface>
+                        <friction>
+                        <ode>
+                            <mu1>100000.0</mu1>
+                            <mu2>100000.0</mu2>
+                        </ode>
+                        </friction>
+                        <contact>
+                        <ode>
+                            <kp>1e+5</kp>
+                            <kd>1</kd>
+                            <soft_cfm>0</soft_cfm>
+                            <soft_erp>0.2</soft_erp>
+                            <minDepth>0.002</minDepth>
+                            <maxVel>0</maxVel>
+                        </ode>
+                        </contact>
+                    </surface>
+                </xacro:unless>
             </collision>
             <inertial>
                 <origin xyz="-0.01456706 -0.0008 0.01649701" rpy="0 0 0" />
@@ -215,28 +240,53 @@
                 </geometry>
             </visual>
             <collision>
-                <geometry>
-                    <!-- <mesh filename="package://symphony_description/meshes/robotiq/collision/2f_85/right_finger_tip.stl" /> -->
-                    <mesh filename="file://$(find symphony_description)/meshes/robotiq/collision/2f_85/right_finger_tip.stl" scope="parent"/>
-                </geometry>
-                <surface>
-                    <friction>
-                    <ode>
-                        <mu1>100000.0</mu1>
-                        <mu2>100000.0</mu2>
-                    </ode>
-                    </friction>
-                    <contact>
-                    <ode>
-                        <kp>1e+5</kp>
-                        <kd>1</kd>
-                        <soft_cfm>0</soft_cfm>
-                        <soft_erp>0.2</soft_erp>
-                        <minDepth>0.002</minDepth>
-                        <maxVel>0</maxVel>
-                    </ode>
-                    </contact>
-                </surface>
+                <xacro:if value="${sim_gazebo}">
+                    <origin xyz="0.021 0 0.028" rpy="0 0 0"/>
+                    <geometry>
+                        <box size="0.008 0.016 0.036"/>
+                    </geometry>
+                    <surface>
+                        <friction>
+                        <ode>
+                            <mu1>100000.0</mu1>
+                            <mu2>100000.0</mu2>
+                        </ode>
+                        </friction>
+                        <contact>
+                        <ode>
+                            <kp>1e+5</kp>
+                            <kd>1</kd>
+                            <soft_cfm>0</soft_cfm>
+                            <soft_erp>0.2</soft_erp>
+                            <minDepth>0.002</minDepth>
+                            <maxVel>0</maxVel>
+                        </ode>
+                        </contact>
+                    </surface>
+                </xacro:if>
+                <xacro:unless value="${sim_gazebo}">
+                    <geometry>
+                        <mesh filename="file://$(find symphony_description)/meshes/robotiq/collision/2f_85/right_finger_tip.stl" scope="parent"/>
+                    </geometry>
+                    <surface>
+                        <friction>
+                        <ode>
+                            <mu1>100000.0</mu1>
+                            <mu2>100000.0</mu2>
+                        </ode>
+                        </friction>
+                        <contact>
+                        <ode>
+                            <kp>1e+5</kp>
+                            <kd>1</kd>
+                            <soft_cfm>0</soft_cfm>
+                            <soft_erp>0.2</soft_erp>
+                            <minDepth>0.002</minDepth>
+                            <maxVel>0</maxVel>
+                        </ode>
+                        </contact>
+                    </surface>
+                </xacro:unless>
             </collision>
             <inertial>
                 <origin xyz="0.01456706 5e-05 0.01649701" rpy="0 0 0" />

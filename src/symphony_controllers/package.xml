@@ -5,7 +5,7 @@
   <version>1.0.0</version>
   <description>Symphony ros2 controllers</description>
   <maintainer email="seonmin3425@puloon.co.kr">Puloon</maintainer>
-  <license>BSD-3-Clause</license>
+<license>BSD-3-Clause</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
 

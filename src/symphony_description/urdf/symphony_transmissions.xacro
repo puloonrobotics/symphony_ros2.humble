@@ -19,7 +19,7 @@
             
         </xacro:if> -->
 
-        <xacro:if value="${symphony_type == 'symphony5' or 'symphony10' or 'symphony15' or 'symphony20' or 'symphony40'}">
+        <xacro:if value="${symphony_type == 'symphony5'}">
             <xacro:define_transmission tran="tran0" joint="joint0" motor="motor0"/>
             <xacro:define_transmission tran="tran1" joint="joint1" motor="motor1"/>
             <xacro:define_transmission tran="tran2" joint="joint2" motor="motor2"/>
@@ -27,6 +27,39 @@
             <xacro:define_transmission tran="tran4" joint="joint4" motor="motor4"/>
             <xacro:define_transmission tran="tran5" joint="joint5" motor="motor5"/>
         </xacro:if>
+        <xacro:if value="${symphony_type == 'symphony10'}">
+            <xacro:define_transmission tran="tran0" joint="joint0" motor="motor0"/>
+            <xacro:define_transmission tran="tran1" joint="joint1" motor="motor1"/>
+            <xacro:define_transmission tran="tran2" joint="joint2" motor="motor2"/>
+            <xacro:define_transmission tran="tran3" joint="joint3" motor="motor3"/>
+            <xacro:define_transmission tran="tran4" joint="joint4" motor="motor4"/>
+            <xacro:define_transmission tran="tran5" joint="joint5" motor="motor5"/>
+        </xacro:if>
+        <xacro:if value="${symphony_type == 'symphony15'}">
+            <xacro:define_transmission tran="tran0" joint="joint0" motor="motor0"/>
+            <xacro:define_transmission tran="tran1" joint="joint1" motor="motor1"/>
+            <xacro:define_transmission tran="tran2" joint="joint2" motor="motor2"/>
+            <xacro:define_transmission tran="tran3" joint="joint3" motor="motor3"/>
+            <xacro:define_transmission tran="tran4" joint="joint4" motor="motor4"/>
+            <xacro:define_transmission tran="tran5" joint="joint5" motor="motor5"/>
+        </xacro:if>
+        <xacro:if value="${symphony_type == 'symphony20'}">
+            <xacro:define_transmission tran="tran0" joint="joint0" motor="motor0"/>
+            <xacro:define_transmission tran="tran1" joint="joint1" motor="motor1"/>
+            <xacro:define_transmission tran="tran2" joint="joint2" motor="motor2"/>
+            <xacro:define_transmission tran="tran3" joint="joint3" motor="motor3"/>
+            <xacro:define_transmission tran="tran4" joint="joint4" motor="motor4"/>
+            <xacro:define_transmission tran="tran5" joint="joint5" motor="motor5"/>
+        </xacro:if>
+        <xacro:if value="${symphony_type == 'symphony40'}">
+            <xacro:define_transmission tran="tran0" joint="joint0" motor="motor0"/>
+            <xacro:define_transmission tran="tran1" joint="joint1" motor="motor1"/>
+            <xacro:define_transmission tran="tran2" joint="joint2" motor="motor2"/>
+            <xacro:define_transmission tran="tran3" joint="joint3" motor="motor3"/>
+            <xacro:define_transmission tran="tran4" joint="joint4" motor="motor4"/>
+            <xacro:define_transmission tran="tran5" joint="joint5" motor="motor5"/>
+        </xacro:if>
+
     </xacro:macro>
 
 </robot>

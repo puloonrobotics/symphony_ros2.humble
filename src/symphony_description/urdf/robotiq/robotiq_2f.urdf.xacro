@@ -7,7 +7,9 @@
       <geometry>
         <mesh filename="package://symphony_description/meshes/robotiq/85_2f/robotiq_85_coupler.stl" />
       </geometry>
-      <!--material name="dr_white"/-->
+      <material name="gripper_metal">
+        <color rgba="0.75 0.75 0.78 1"/>
+      </material>
     </visual>
     <collision>
       <geometry>
@@ -33,7 +35,6 @@
   <gazebo reference="robotiq_coupler">
     <mu1>0.9</mu1>
     <mu2>0.9</mu2>
-    <material>Gazebo/FlatBlack</material>
   </gazebo>
   
   <!-- Equivalent to the OpenRAVE manipulator denso_robotiq_85_gripper -->

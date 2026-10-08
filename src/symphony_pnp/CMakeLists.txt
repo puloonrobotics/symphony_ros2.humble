@@ -13,6 +13,9 @@ find_package(tf2_geometry_msgs REQUIRED)
 add_executable(pnp src/pnp.cpp)
 ament_target_dependencies(pnp rclcpp moveit_ros_planning_interface tf2_geometry_msgs)
 
+add_executable(pnp_15 src/pnp_15.cpp)
+ament_target_dependencies(pnp_15 rclcpp moveit_ros_planning_interface tf2_geometry_msgs)
+
 find_package(ignition-gazebo6 QUIET)
 if(ignition-gazebo6_FOUND)
   add_library(pnp_hold SHARED src/pnp_hold.cpp)
@@ -27,7 +30,7 @@ if(BUILD_TESTING)
   ament_lint_auto_find_test_dependencies()
 endif()
 
-install(TARGETS pnp DESTINATION lib/${PROJECT_NAME})
+install(TARGETS pnp pnp_15 DESTINATION lib/${PROJECT_NAME})
 install(DIRECTORY
   launch models 
   DESTINATION share/${PROJECT_NAME}/
